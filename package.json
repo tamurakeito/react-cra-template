@@ -21,7 +21,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "init": "chmod 755 .init.sh && ./.init.sh"
+    "ini": "chmod 755 .init.sh && ./.init.sh"
   },
   "eslintConfig": {
     "extends": [
