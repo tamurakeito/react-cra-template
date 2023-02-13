@@ -1,5 +1,6 @@
 echo '\x1b[36mプロジェクト名を入力しEnterキーを押してください\x1b[0m'
 read -p '> ' title
+rm -r ./.init.sh
 yes | rm -r ./.git
 echo '...gitをリセットしました...'
 # packageにある名前を一括で変更する記述
