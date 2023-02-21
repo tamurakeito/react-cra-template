@@ -12,3 +12,6 @@ echo '...gitをリセットしました...'
 sed -i '' s/react-ts-template/${title}/ package*
 mv ../react-ts-template ../${title}
 echo '...プロジェクト名を設定しました...'
+
+cd ../${title}
+code .

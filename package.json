@@ -21,6 +21,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "push": "chmod 755 .gitpush.sh &&./.gitpush.sh",
     "ini": "chmod 755 .init.sh && ./.init.sh"
   },
   "eslintConfig": {
