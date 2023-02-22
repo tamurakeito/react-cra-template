@@ -1,18 +1,32 @@
-# macOS以外で動作する場合は date の取得を適時OS環境に合わせて修正してください
-date=`date +"%Y%m%d%H%M%S"` # yyyymmddHHMMSSのフォーマットで日付時刻を出力（macOS12.5でのみ動作確認）
-branch="v${date}"
-# 以下gitの処理
-echo '\x1b[36mコミットメッセージを入力しEnterキーを押してください\x1b[0m'
-read -p '> ' line
-git branch -M "${branch}"
-git add .
-git commit -m "yarn commit: ${line}"
-git push -u origin "${branch}"
+## mainブランチに直接コミットする場合
+
 git checkout main
 git pull
-git merge "${branch}"
+echo '\x1b[36mコミットメッセージを入力しEnterキーを押してください\x1b[0m'
+read -p '> ' line
+git add .
+git commit -m "yarn commit: ${line}"
 git push origin main
-git checkout -b "working-branch"
+
+## ブランチを切り分けるプロジェクトの場合
+
+# # macOS以外で動作する場合は date の取得を適時OS環境に合わせて修正してください
+# date=`date +"%Y%m%d%H%M%S"` # yyyymmddHHMMSSのフォーマットで日付時刻を出力（macOS12.5でのみ動作確認）
+# branch="v${date}"
+# # 以下gitの処理
+# echo '\x1b[36mコミットメッセージを入力しEnterキーを押してください\x1b[0m'
+# read -p '> ' line
+# git branch -M "${branch}"
+# git add .
+# git commit -m "yarn commit: ${line}"
+# git push -u origin "${branch}"
+# git checkout main
+# git pull
+# git merge "${branch}"
+# git push origin main
+# git checkout -b "working-branch"
+
+## PRを作成するプロジェクトの場合
 
 # echo "\x1b[36m選択してください\x1b[0m"
 # choices="1.現在のブランチにコミットする"
