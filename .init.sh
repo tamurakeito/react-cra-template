@@ -13,6 +13,3 @@ sed -i '' s/react-ts-template/${title}/ package*
 cd ../
 mv react-ts-template ${title}
 echo '...プロジェクト名を設定しました...'
-
-cd ${title}
-code .
