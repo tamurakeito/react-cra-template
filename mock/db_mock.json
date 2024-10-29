@@ -1,0 +1,9 @@
+{
+  "memo-summary": [
+    { "id": 1, "name": "タスクメモ", "tag": true, "length": 6 },
+    { "id": 2, "name": "買うものメモ", "tag": false, "length": 3 },
+    { "id": 3, "name": "勉強メモ", "tag": false, "length": 5 },
+    { "id": 4, "name": "タスクメモ2", "tag": true, "length": 6 }
+  ],
+  "delete-memo": {}
+}

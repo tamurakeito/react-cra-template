@@ -19,10 +19,13 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "react-scripts start & yarn mock_server",
+    "start:local": "dotenv -e .env.localdev react-scripts start",
+    "start:prd": "dotenv -e .env react-scripts start",
     "build": "react-scripts build",
     "push": "chmod 755 .gitpush.sh &&./.gitpush.sh",
     "ini": "chmod 755 .init.sh && ./.init.sh",
+    "mock_server": "./node_modules/.bin/json-server --watch mock/db_mock.json --routes mock/routes.json --middlewares mock/middleware.js  --port 3004",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build"
   },
@@ -58,8 +61,11 @@
     "@storybook/react-webpack5": "^8.1.1",
     "@storybook/test": "^8.1.1",
     "@types/sass": "^1.43.1",
+    "axios": "^1.7.7",
     "classnames": "^2.3.2",
+    "dotenv-cli": "^7.4.2",
     "eslint-plugin-storybook": "^0.8.0",
+    "json-server": "^0.17.3",
     "prop-types": "^15.8.1",
     "sass": "^1.58.0",
     "storybook": "^8.1.1",
