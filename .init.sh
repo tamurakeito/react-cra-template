@@ -2,7 +2,7 @@ echo '\x1b[36mプロジェクト名を入力しEnterキーを押してくださ�
 read -p '> ' title
 
 rm -r ./.init.sh
-echo '# ${title}' > ./README.md
+echo '#' ${title} > ./README.md
 echo '...init操作関連ファイルをクリアしました...'
 
 yes | rm -r ./.git
