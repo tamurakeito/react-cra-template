@@ -1,5 +1,5 @@
-import Text from "ui/atoms/text";
+import Text, { textSizes } from "ui/atoms/text";
 
 export const Home = () => {
-  return <Text>hello world</Text>;
+  return <Text size={textSizes.h1}>hello world</Text>;
 };
