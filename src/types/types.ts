@@ -1,6 +1,7 @@
-export type MemoSummaryType = {
+// authentication
+
+export type AccountData = {
   id: number;
-  name: string;
-  tag: boolean;
-  length: number;
+  user: string;
+  token: string;
 };
