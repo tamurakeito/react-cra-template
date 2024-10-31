@@ -19,7 +19,7 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start & yarn mock_server",
+    "start": "dotenv -e .env.development react-scripts start & yarn mock_server",
     "start:local": "dotenv -e .env.localdev react-scripts start",
     "start:prd": "dotenv -e .env react-scripts start",
     "build": "react-scripts build",
