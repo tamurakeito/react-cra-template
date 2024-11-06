@@ -47,6 +47,7 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
   const signOut = () => {
     setUser(undefined);
     setToken(undefined);
+    redirect();
   };
 
   // redirect to signin
@@ -61,17 +62,14 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
     // ログインしていない場合
     const userUser = user?.user || undefined;
     if (!!!userUser) {
-      setUser(undefined);
-      redirect();
+      signOut();
     }
 
     // セッション切れの場合
     const untilSessionExpire = 1440000; // １日分のミリ秒 // １日経過するとセッション切れとなる
     const userSession = user?.session || undefined;
     if (!!!userSession || Date.now() - userSession > untilSessionExpire) {
-      setUser(undefined);
-      setToken(undefined);
-      redirect();
+      signOut();
     }
 
     // トークンが無効である場合

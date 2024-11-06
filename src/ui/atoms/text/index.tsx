@@ -4,16 +4,23 @@ import classNames from "classnames";
 
 const Text = ({
   children,
-  size,
+  size = textSizes.md,
+  color = textColors.black,
   className,
   onClick = () => {},
 }: {
   children: ReactNode;
   size?: TextSize;
+  color?: TextColor;
   className?: string;
   onClick?: () => void;
 }) => {
-  const clazz = classNames(classes.text, classes[`font--${size}`], className);
+  const clazz = classNames(
+    classes.text,
+    classes[`font_${size}`],
+    classes[`color_${color}`],
+    className
+  );
   return (
     <span className={clazz} onClick={onClick}>
       {children}
@@ -44,3 +51,18 @@ export const textSizes = {
   ...textHeaderSizes,
 } as const;
 export type TextSize = (typeof textSizes)[keyof typeof textSizes];
+
+export const textColors = {
+  black: "black",
+  gray_100: "gray_100",
+  gray_200: "gray_200",
+  gray_300: "gray_300",
+  gray_400: "gray_400",
+  gray_500: "gray_500",
+  gray_600: "gray_600",
+  gray_700: "gray_700",
+  gray_800: "gray_800",
+  gray_900: "gray_900",
+  white: "white",
+} as const;
+export type TextColor = (typeof textColors)[keyof typeof textColors];

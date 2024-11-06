@@ -1,16 +1,26 @@
 import { client } from "data/axios";
-import { AccountData } from "types/types";
+import { Account } from "types/types";
 
 export async function postSignIn(
-  id: string,
+  userId: string,
   password: string
-): Promise<AccountData | undefined> {
-  const data = { id: id, password: password };
+): Promise<Account | undefined> {
+  const data = { user_id: userId, password: password };
   try {
     const url = "/sign-in";
-    const response = await client.post<AccountData>(url, data);
+    const response = await client.post<{
+      id: number;
+      user: string;
+      token: string;
+    }>(url, data);
 
-    return response.data;
+    const account: Account = {
+      id: response.data.id,
+      user: response.data.user,
+      token: response.data.token,
+    };
+
+    return account;
   } catch (error) {
     console.error(error);
     return undefined;

@@ -1,6 +1,6 @@
 // authentication
 
-export type AccountData = {
+export type Account = {
   id: number;
   user: string;
   token: string;

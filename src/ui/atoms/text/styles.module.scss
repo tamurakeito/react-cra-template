@@ -3,54 +3,89 @@
 .text {
   word-break: break-all;
   &.font {
-    &--h1 {
+    &_h1 {
       font-weight: var.$FONT_WEIGHT_HEADLINE;
       font-size: var.$FONT_SIZE_HEADLINE_H1;
     }
 
-    &--h2 {
+    &_h2 {
       font-weight: var.$FONT_WEIGHT_HEADLINE;
       font-size: var.$FONT_SIZE_HEADLINE_H2;
     }
 
-    &--h3 {
+    &_h3 {
       font-weight: var.$FONT_WEIGHT_HEADLINE;
       font-size: var.$FONT_SIZE_HEADLINE_H3;
     }
 
-    &--h4 {
+    &_h4 {
       font-weight: var.$FONT_WEIGHT_HEADLINE;
       font-size: var.$FONT_SIZE_HEADLINE_H4;
     }
 
-    &--h5 {
+    &_h5 {
       font-weight: var.$FONT_WEIGHT_HEADLINE;
       font-size: var.$FONT_SIZE_HEADLINE_H5;
     }
 
-    &--h6 {
+    &_h6 {
       font-weight: var.$FONT_WEIGHT_HEADLINE;
       font-size: var.$FONT_SIZE_HEADLINE_H6;
     }
 
-    &--xs {
+    &_xs {
       font-weight: var.$FONT_WEIGHT_TEXT;
       font-size: var.$FONT_SIZE_TEXT_XS;
     }
 
-    &--sm {
+    &_sm {
       font-weight: var.$FONT_WEIGHT_TEXT;
       font-size: var.$FONT_SIZE_TEXT_SM;
     }
 
-    &--md {
+    &_md {
       font-weight: var.$FONT_WEIGHT_TEXT;
       font-size: var.$FONT_SIZE_TEXT_MD;
     }
 
-    &--lg {
+    &_lg {
       font-weight: var.$FONT_WEIGHT_TEXT;
       font-size: var.$FONT_SIZE_TEXT_LG;
+    }
+  }
+  &.color {
+    &_black {
+      color: var.$BLACK_DARK;
+    }
+    &_gray_100 {
+      color: var.$GRAY_100;
+    }
+    &_gray_200 {
+      color: var.$GRAY_200;
+    }
+    &_gray_300 {
+      color: var.$GRAY_300;
+    }
+    &_gray_400 {
+      color: var.$GRAY_400;
+    }
+    &_gray_500 {
+      color: var.$GRAY_500;
+    }
+    &_gray_600 {
+      color: var.$GRAY_600;
+    }
+    &_gray_700 {
+      color: var.$GRAY_700;
+    }
+    &_gray_800 {
+      color: var.$GRAY_800;
+    }
+    &_gray_900 {
+      color: var.$GRAY_900;
+    }
+    &_white {
+      color: var.$WHITE;
     }
   }
 }
