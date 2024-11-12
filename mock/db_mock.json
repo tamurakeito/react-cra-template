@@ -5,7 +5,8 @@
   "delete-example": {},
   "sign-in": {
     "id": 0,
-    "user": "tamura keito",
-    "token": "dlsfkvsdkljfnvlskj"
+    "user_id": "user",
+    "name": "たむら けいと",
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MzEwNDM3NTUsInVzZXJJZCI6InVzZXIifQ.7gEEymKDjHBiGuYvnK46kDVR0ih_jNiI8-ptMuf3nSw"
   }
 }

@@ -4,10 +4,6 @@ module.exports = function (req, res, next) {
   if (req.method !== "GET") {
     req.method = "GET";
   }
-  // 返されるステータスコードをデフォルトの200から変更する
-  // if (req.originalUrl === "/doctor-registration") {
-  //   res.statusCode = 400;
-  // }
 
   next();
 };

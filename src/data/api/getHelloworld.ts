@@ -1,8 +1,8 @@
 import { client } from "data/axios";
 
-export async function getExample(id: number): Promise<string | undefined> {
+export async function getHelloworld(id: number): Promise<string | undefined> {
   try {
-    const url = `/example/${id}`;
+    const url = `/hello-world/${id}`;
     const response = await client.get<string>(url);
     return response.data;
   } catch (error) {

@@ -4,16 +4,11 @@ import useLocalStorage, {
   userStorageKey,
 } from "hooks/useLocalStrage";
 import { useNavigate } from "react-router-dom";
-
-export type User = {
-  id: number;
-  user: string;
-  session: number;
-};
+import { User } from "types/types";
 
 type AuthContext = {
   user?: User;
-  signIn: (id: number, user: string, token: string) => void;
+  signIn: (id: number, userId: string, name: string, token: string) => void;
   signOut: () => void;
 };
 
@@ -35,13 +30,14 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
     tokenStorageKey,
     undefined
   );
-  const signIn = (id: number, user: string, token: string) => {
-    const User = {
+  const signIn = (id: number, userId: string, name: string, token: string) => {
+    const account = {
       id: id,
-      user: user,
+      userId: userId,
+      name: name,
       session: Date.now(),
     };
-    setUser(User);
+    setUser(account);
     setToken(token);
   };
   const signOut = () => {
@@ -60,7 +56,7 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
   };
   useEffect(() => {
     // ログインしていない場合
-    const userUser = user?.user || undefined;
+    const userUser = user?.userId || undefined;
     if (!!!userUser) {
       signOut();
     }

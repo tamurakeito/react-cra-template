@@ -7,7 +7,7 @@ const Center = ({
   className,
 }: {
   children: ReactNode;
-  className: string;
+  className?: string;
 }) => {
   const clazz = classNames([classes.center, className]);
   return (

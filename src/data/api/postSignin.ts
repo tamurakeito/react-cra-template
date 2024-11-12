@@ -1,28 +1,28 @@
 import { client } from "data/axios";
-import { Account } from "types/types";
+import { SignInResponse, ErrorResponse } from "data/utils/typeGuards";
 
-export async function postSignIn(
+export async function PostSignIn(
   userId: string,
   password: string
-): Promise<Account | undefined> {
+): Promise<SignInResponse | ErrorResponse | undefined> {
   const data = { user_id: userId, password: password };
   try {
     const url = "/sign-in";
-    const response = await client.post<{
-      id: number;
-      user: string;
-      token: string;
-    }>(url, data);
-
-    const account: Account = {
-      id: response.data.id,
-      user: response.data.user,
-      token: response.data.token,
-    };
-
-    return account;
-  } catch (error) {
-    console.error(error);
-    return undefined;
+    const response = await client.post(url, data);
+    return response.data;
+  } catch (error: any) {
+    if (error.response && error.response.data) {
+      const errorResponse: ErrorResponse = error.response.data;
+      return errorResponse;
+    } else {
+      return undefined;
+    }
   }
 }
+
+export const postSignInErrors = {
+  notFound: "user not found",
+  unauthorized: "invalid password",
+} as const;
+export type PostSignInErrors =
+  (typeof postSignInErrors)[keyof typeof postSignInErrors];

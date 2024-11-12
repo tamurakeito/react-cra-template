@@ -54,15 +54,15 @@ export type TextSize = (typeof textSizes)[keyof typeof textSizes];
 
 export const textColors = {
   black: "black",
-  gray_100: "gray_100",
-  gray_200: "gray_200",
-  gray_300: "gray_300",
-  gray_400: "gray_400",
-  gray_500: "gray_500",
-  gray_600: "gray_600",
-  gray_700: "gray_700",
-  gray_800: "gray_800",
-  gray_900: "gray_900",
+  gray100: "gray_100",
+  gray200: "gray_200",
+  gray300: "gray_300",
+  gray400: "gray_400",
+  gray500: "gray_500",
+  gray600: "gray_600",
+  gray700: "gray_700",
+  gray800: "gray_800",
+  gray900: "gray_900",
   white: "white",
 } as const;
 export type TextColor = (typeof textColors)[keyof typeof textColors];

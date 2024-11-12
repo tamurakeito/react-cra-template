@@ -5,16 +5,17 @@
   div {
     margin: 10px;
   }
+  input {
+    border: 1px solid var.$GRAY_800;
+    padding: 0 6px;
+    color: var.$GRAY_800;
+    &::placeholder {
+      color: var.$GRAY_600;
+    }
+  }
 }
 
 .status {
+  padding: 0 6px;
   background: var.$GRAY_200;
-}
-
-.button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: var.$GRAY_200;
-  border: 1px solid var.$GRAY_800;
 }
