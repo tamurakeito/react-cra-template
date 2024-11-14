@@ -1,5 +1,4 @@
 import toast, { Toaster } from "react-hot-toast";
-import classes from "./styles.module.scss";
 
 export const Toast = () => {
   return (

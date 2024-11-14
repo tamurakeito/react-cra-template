@@ -4,11 +4,3 @@ export type User = {
   name: string;
   session: number;
 };
-
-// authentication
-export type Account = {
-  id: number;
-  userId: string;
-  name: string;
-  token: string;
-};

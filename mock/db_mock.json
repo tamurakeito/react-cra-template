@@ -1,8 +1,12 @@
 {
-  "example": {},
-  "post-example": {},
-  "put-example": {},
-  "delete-example": {},
+  "hello-world": {
+    "id": 1,
+    "hello": {
+      "id": 1,
+      "name": "hello, world!",
+      "tag": true
+    }
+  },
   "sign-in": {
     "id": 0,
     "user_id": "user",

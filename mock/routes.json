@@ -1,5 +1,3 @@
 {
-  "/memo-detail/*": "/memo-detail",
-  "/delete-memo/*": "/delete-memo",
-  "/delete-task/*": "/delete-task"
+  "/hello-world/*": "/hello-world"
 }

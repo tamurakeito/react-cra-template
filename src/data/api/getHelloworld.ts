@@ -1,12 +1,28 @@
 import { client } from "data/axios";
+import { ErrorResponse, HelloworldResponse } from "data/utils/typeGuards";
 
-export async function getHelloworld(id: number): Promise<string | undefined> {
+export async function GetHelloworld(
+  id: number
+): Promise<HelloworldResponse | ErrorResponse | undefined> {
   try {
     const url = `/hello-world/${id}`;
-    const response = await client.get<string>(url);
+    const response = await client.get(url, {
+      headers: {
+        "Add-Authorization": "true", // トークンを付与するリクエストにのみ設定
+      },
+    });
     return response.data;
-  } catch (error) {
-    console.error(error);
-    return undefined;
+  } catch (error: any) {
+    if (error.response && error.response.data) {
+      return error.response.data;
+    } else {
+      return undefined;
+    }
   }
 }
+
+export const getHelloworldErrors = {
+  notFound: "no results found",
+} as const;
+export type GetHelloworldErrors =
+  (typeof getHelloworldErrors)[keyof typeof getHelloworldErrors];

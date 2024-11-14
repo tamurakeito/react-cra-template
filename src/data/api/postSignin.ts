@@ -12,8 +12,7 @@ export async function PostSignIn(
     return response.data;
   } catch (error: any) {
     if (error.response && error.response.data) {
-      const errorResponse: ErrorResponse = error.response.data;
-      return errorResponse;
+      return error.response.data;
     } else {
       return undefined;
     }

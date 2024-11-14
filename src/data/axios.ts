@@ -11,7 +11,10 @@ client.interceptors.request.use(
   (config) => {
     // カスタムプロパティを確認
     if (config.headers && config.headers["Add-Authorization"] === "true") {
-      const token = localStorage.getItem(tokenStorageKey);
+      // const token = localStorage.getItem(tokenStorageKey);
+      const token = localStorage
+        .getItem(tokenStorageKey)
+        ?.replace(/^"|"$/g, "");
       if (token) {
         config.headers["Authorization"] = `Bearer ${token}`;
         config.headers["Requires-Auth"] = "true";
@@ -31,23 +34,23 @@ client.interceptors.response.use(
     return response;
   },
   (error) => {
-    // エラーレスポンスのデータを確認してJWTエラーハンドリング
-    if (
-      error.config &&
-      error.config.headers &&
-      error.config.headers["Requires-Auth"] === "true" &&
-      error.response &&
-      error.response.data &&
-      error.response.data.message === "invalid or expired jwt"
-    ) {
-      console.error("Token is invalid or expired.");
-      // ここで必要な処理を追加（例: ログアウト、リダイレクト、通知の表示など）
-      alert("Your session has expired. Please log in again.");
-      localStorage.removeItem(tokenStorageKey); // ログアウトの例としてトークンを削除
+    // // エラーレスポンスのデータを確認してJWTエラーハンドリング
+    // if (
+    //   error.config &&
+    //   error.config.headers &&
+    //   error.config.headers["Requires-Auth"] === "true" &&
+    //   error.response &&
+    //   error.response.data &&
+    //   error.response.data.message === "invalid or expired jwt"
+    // ) {
+    //   console.error("Token is invalid or expired.");
+    //   // ここで必要な処理を追加（例: ログアウト、リダイレクト、通知の表示など）
+    //   alert("Your session has expired. Please log in again.");
+    //   localStorage.removeItem(tokenStorageKey); // ログアウトの例としてトークンを削除
 
-      // 例えば、ログインページへのリダイレクト
-      window.location.href = "/sign-in";
-    }
+    //   // 例えば、ログインページへのリダイレクト
+    //   window.location.href = "/sign-in";
+    // }
 
     // 他のエラーはそのまま返す
     return Promise.reject(error);

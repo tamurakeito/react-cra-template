@@ -11,6 +11,7 @@ import Center from "ui/atoms/center";
 import Button from "ui/atoms/button";
 import { handleUnexpectedError } from "data/utils/handleErrors";
 import { setToast, toastTypes } from "components/toast";
+import { useNavigate } from "react-router-dom";
 
 export const SignIn = () => {
   const idRef = useRef<HTMLInputElement | null>(null);
@@ -18,6 +19,7 @@ export const SignIn = () => {
   const [id, setId] = useState("");
   const [pass, setPass] = useState("");
   const { user, signIn, signOut } = useAuthContext();
+  const navigate = useNavigate();
 
   useEffect(() => {
     idRef.current?.focus();
@@ -47,6 +49,7 @@ export const SignIn = () => {
       setId("");
       setPass("");
       setToast("サインインしました", toastTypes.success);
+      navigate("/");
     } else if (checkIsErrorResponse(result)) {
       switch (result.error) {
         case postSignInErrors.unauthorized:

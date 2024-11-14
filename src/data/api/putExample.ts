@@ -1,6 +1,6 @@
 import { client } from "data/axios";
 
-export async function putExample(obj: string): Promise<string | undefined> {
+export async function PutExample(obj: string): Promise<string | undefined> {
   try {
     const url = `/put-example`;
     const response = await client.put<string>(url, obj);
