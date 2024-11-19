@@ -24,4 +24,4 @@ yarn-error.log*
 
 *storybook.log
 
-./src/ui
+/src/ui
