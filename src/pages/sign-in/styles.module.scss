@@ -3,7 +3,7 @@
 .sign_in {
   margin: 100px;
   div {
-    margin: 10px;
+    margin: 10px 0;
   }
   input {
     border: 1px solid var.$GRAY_800;
@@ -12,6 +12,9 @@
     &::placeholder {
       color: var.$GRAY_600;
     }
+  }
+  .button {
+    margin: 0 auto;
   }
 }
 

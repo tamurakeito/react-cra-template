@@ -8,6 +8,12 @@ git add .
 git commit -m "yarn commit: ${line}"
 git push origin main
 
+cd src/ui
+git pull
+git add .
+git commit -m "yarn commit: ${line}"
+git push origin main
+
 ## ブランチを切り分けるプロジェクトの場合
 
 # # macOS以外で動作する場合は date の取得を適時OS環境に合わせて修正してください
