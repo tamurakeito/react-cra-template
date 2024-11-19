@@ -13,3 +13,7 @@ find . -type f -exec sed -i '' "s/react-ts-template/${title}/g" {} +
 cd ../
 mv react-ts-template ${title}
 echo '...プロジェクト名を設定しました...'
+
+cd ${title}/src
+git clone git@github.com:tamurakeito/react-atomic-ui.git
+mv react-atomic-ui ui
