@@ -1,14 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 import classes from "./styles.module.scss";
-import Text, { textColors, textSizes } from "ui/atoms/text";
+import Text, { textColors, textSizes } from "@tamurakeito/ui/atoms/text";
 import { PostSignIn, postSignInErrors } from "data/api/postSignin";
 import {
   checkIsErrorResponse,
   checkIsSignInResponse,
 } from "data/utils/typeGuards";
 import { useAuthContext } from "providers/auth-provider";
-import Center from "ui/atoms/center";
-import Button from "ui/atoms/button";
+import Center from "@tamurakeito/ui/atoms/center";
+import Button from "@tamurakeito/ui/atoms/button";
 import { handleUnexpectedError } from "data/utils/handleErrors";
 import { setToast, toastTypes } from "components/toast";
 import { useNavigate } from "react-router-dom";
