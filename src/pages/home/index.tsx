@@ -12,6 +12,19 @@ import { handleUnexpectedError } from "data/utils/handleErrors";
 import { tokenStorageKey } from "hooks/useLocalStrage";
 
 export const Home = () => {
+  return (
+    <Center className={classes.home}>
+      <div>
+        <Text size={textSizes.h1}>hello world</Text>
+      </div>
+      <HelloWorldButton id={1} />
+      <HelloWorldButton id={2} />
+      <HelloWorldButton id={3} />
+    </Center>
+  );
+};
+
+const HelloWorldButton = ({ id }: { id: number }) => {
   const handleHelloworld = async (id: number) => {
     console.log(localStorage.getItem(tokenStorageKey));
     const result = await GetHelloworld(id);
@@ -29,21 +42,9 @@ export const Home = () => {
       handleUnexpectedError();
     }
   };
-
   return (
-    <Center className={classes.home}>
-      <div>
-        <Text size={textSizes.h1}>hello world</Text>
-      </div>
-      <Button className={classes.button} onClick={() => handleHelloworld(1)}>
-        id: 1
-      </Button>
-      <Button className={classes.button} onClick={() => handleHelloworld(2)}>
-        id: 2
-      </Button>
-      <Button className={classes.button} onClick={() => handleHelloworld(3)}>
-        id: 3
-      </Button>
-    </Center>
+    <Button className={classes.button} onClick={() => handleHelloworld(id)}>
+      id: {id}
+    </Button>
   );
 };
