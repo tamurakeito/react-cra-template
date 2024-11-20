@@ -6,13 +6,13 @@ import useLocalStorage, {
 import { useNavigate } from "react-router-dom";
 import { User } from "types/types";
 
-type AuthContext = {
+type AuthContextType = {
   user?: User;
   signIn: (id: number, userId: string, name: string, token: string) => void;
   signOut: () => void;
 };
 
-const AuthContext = React.createContext<AuthContext>({
+const AuthContext = React.createContext<AuthContextType>({
   signOut: () => {
     console.log("sign out unimplemented");
   },
@@ -54,22 +54,26 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
       navigation("/sign-in");
     }
   };
-  useEffect(() => {
-    // ログインしていない場合
-    const userUser = user?.userId || undefined;
-    if (!!!userUser) {
-      signOut();
-    }
+  useEffect(
+    () => {
+      // ログインしていない場合
+      const userUser = user?.userId || undefined;
+      if (!!!userUser) {
+        signOut();
+      }
 
-    // セッション切れの場合
-    const untilSessionExpire = 1440000; // １日分のミリ秒 // １日経過するとセッション切れとなる
-    const userSession = user?.session || undefined;
-    if (!!!userSession || Date.now() - userSession > untilSessionExpire) {
-      signOut();
-    }
+      // セッション切れの場合
+      const untilSessionExpire = 1440000; // １日分のミリ秒 // １日経過するとセッション切れとなる
+      const userSession = user?.session || undefined;
+      if (!!!userSession || Date.now() - userSession > untilSessionExpire) {
+        signOut();
+      }
 
-    // トークンが無効である場合
-  }, [user, token, navigation]);
+      // トークンが無効である場合
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [user, token, navigation]
+  );
 
   return (
     <AuthContext.Provider
@@ -84,6 +88,6 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
   );
 };
 
-export const useAuthContext = (): AuthContext => {
+export const useAuthContext = (): AuthContextType => {
   return useContext(AuthContext);
 };
