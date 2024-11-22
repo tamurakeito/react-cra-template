@@ -16,4 +16,5 @@ echo '...プロジェクト名を設定しました...'
 
 cd ${title}/src
 git clone git@github.com:tamurakeito/react-atomic-ui.git
+yes | rm -r ui
 mv react-atomic-ui ui
