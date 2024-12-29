@@ -1,12 +1,5 @@
 ## mainブランチに直接コミットする場合
 
-echo "\033[36mSSH 鍵のパスフレーズを入力してください\033[0m"
-read -s -p 'Enter passphrase: ' passphrase
-echo
-export GIT_SSH_COMMAND="ssh -o BatchMode=no -o StrictHostKeyChecking=accept-new"
-eval "$(ssh-agent -s)" > /dev/null
-echo "$passphrase" | ssh-add ~/.ssh/id_rsa > /dev/null
-
 git checkout main
 git pull
 echo '\x1b[36mコミットメッセージを入力しEnterキーを押してください\x1b[0m'
