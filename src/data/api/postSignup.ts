@@ -18,9 +18,10 @@ export const checkIsSignUpResponse = (obj: any): obj is SignUpResponse => {
 
 export async function PostSignUp(
   userId: string,
-  password: string
+  password: string,
+  name: string
 ): Promise<SignUpResponse | ErrorResponse | undefined> {
-  const data = { user_id: userId, password: password };
+  const data = { user_id: userId, password: password, name: name };
   try {
     const url = "/sign-up";
     const response = await client.post(url, data);

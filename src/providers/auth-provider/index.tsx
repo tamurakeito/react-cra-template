@@ -40,9 +40,12 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
     setUser(account);
     setToken(token);
   };
-  const signOut = () => {
+  const clear = () => {
     setUser(undefined);
     setToken(undefined);
+  };
+  const signOut = () => {
+    clear();
     redirect();
   };
 
@@ -50,7 +53,10 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
   const navigation = useNavigate();
   const redirect = () => {
     // パスが`/signup`以外であった場合ログイン画面へリダイレクト
-    if (window.location.pathname.indexOf("/sign-up") !== 0) {
+    if (
+      window.location.pathname.indexOf("/sign-in") !== 0 &&
+      window.location.pathname.indexOf("/sign-up") !== 0
+    ) {
       navigation("/sign-in");
     }
   };
@@ -67,6 +73,14 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
       const userSession = user?.session || undefined;
       if (!!!userSession || Date.now() - userSession > untilSessionExpire) {
         signOut();
+      }
+
+      // /sign-in, /sign-up のパスへ移動した際にアカウントクリアする
+      if (
+        window.location.pathname.indexOf("/sign-in") === 0 ||
+        window.location.pathname.indexOf("/sign-up") === 0
+      ) {
+        clear();
       }
 
       // トークンが無効である場合

@@ -10,7 +10,6 @@ import {
 import { checkIsErrorResponse } from "data/utils/typeGuards";
 import { setToast, toastTypes } from "components/toast";
 import { handleUnexpectedError } from "data/utils/handleErrors";
-import { tokenStorageKey } from "hooks/useLocalStrage";
 import { useState } from "react";
 import Spinner from "ui/atoms/spinner";
 

@@ -67,7 +67,7 @@ export const SignIn = () => {
           break;
         case postSignInErrors.internalServerError:
           setToast(
-            "サーバで問題が発生しました. 時間を置いて再度お試しください.",
+            "サーバーで問題が発生しました. 時間を置いて再度お試しください.",
             toastTypes.error
           );
           break;
@@ -109,7 +109,7 @@ export const SignIn = () => {
             <Input
               ref={idRef}
               value={id}
-              placeholder={"id"}
+              placeholder={"ユーザーID"}
               onChange={(event) => setId(event.target.value)}
               onKeyDown={(event) => {
                 event.key === "Enter" && passRef.current?.focus();
@@ -121,7 +121,7 @@ export const SignIn = () => {
               ref={passRef}
               type={"password"}
               value={pass}
-              placeholder={"password"}
+              placeholder={"パスワード"}
               onChange={(event) => setPass(event.target.value)}
               onKeyDown={(event) => {
                 event.key === "Enter" && handleSignIn();

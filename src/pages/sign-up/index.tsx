@@ -18,10 +18,12 @@ import Spinner from "ui/atoms/spinner";
 
 const SignUp = () => {
   const idRef = useRef<HTMLInputElement | null>(null);
+  const nameRef = useRef<HTMLInputElement | null>(null);
   const passRef = useRef<HTMLInputElement | null>(null);
   const [id, setId] = useState("");
+  const [name, setName] = useState("");
   const [pass, setPass] = useState("");
-  const { user, signIn, signOut } = useAuthContext();
+  const { signIn } = useAuthContext();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -29,9 +31,13 @@ const SignUp = () => {
     idRef.current?.focus();
   }, []);
 
-  const validation = (user: string, password: string) => {
+  const validation = (user: string, name: string, password: string) => {
     if (!user.trim()) {
       setToast("ユーザーIDを入力してください。", toastTypes.error);
+      return false;
+    }
+    if (!name.trim()) {
+      setToast("アカウント表示名を入力してください。", toastTypes.error);
       return false;
     }
     if (!password.trim()) {
@@ -44,16 +50,17 @@ const SignUp = () => {
   const handleSignUp = async () => {
     await setIsLoading(true);
 
-    if (!validation(id, pass)) {
+    if (!validation(id, name, pass)) {
       setIsLoading(false);
       return;
     }
 
-    const result = await PostSignUp(id, pass);
+    const result = await PostSignUp(id, pass, name);
 
     if (checkIsSignUpResponse(result)) {
       signIn(result.id, result.user_id, result.name, result.token);
       setId("");
+      setName("");
       setPass("");
       setToast("アカウントが登録されました", toastTypes.success);
       navigate("/");
@@ -61,7 +68,7 @@ const SignUp = () => {
       switch (result.error) {
         case postSignUpErrors.badRequest:
           setToast(
-            "idまたはパスワードの形式が正しくありません",
+            "ユーザーIDまたはパスワードの形式が正しくありません",
             toastTypes.error
           );
           break;
@@ -73,7 +80,7 @@ const SignUp = () => {
           break;
         case postSignUpErrors.internalServerError:
           setToast(
-            "サーバで問題が発生しました. 時間を置いて再度お試しください.",
+            "サーバーで問題が発生しました. 時間を置いて再度お試しください.",
             toastTypes.error
           );
           break;
@@ -96,8 +103,19 @@ const SignUp = () => {
         <Input
           ref={idRef}
           value={id}
-          placeholder={"id"}
+          placeholder={"ユーザーID"}
           onChange={(event) => setId(event.target.value)}
+          onKeyDown={(event) => {
+            event.key === "Enter" && nameRef.current?.focus();
+          }}
+        />
+      </div>
+      <div className={classes.container}>
+        <Input
+          ref={nameRef}
+          value={name}
+          placeholder={"アカウント表示名"}
+          onChange={(event) => setName(event.target.value)}
           onKeyDown={(event) => {
             event.key === "Enter" && passRef.current?.focus();
           }}
@@ -108,7 +126,7 @@ const SignUp = () => {
           ref={passRef}
           type={"password"}
           value={pass}
-          placeholder={"password"}
+          placeholder={"パスワード"}
           onChange={(event) => setPass(event.target.value)}
           onKeyDown={(event) => {
             event.key === "Enter" && handleSignUp();
