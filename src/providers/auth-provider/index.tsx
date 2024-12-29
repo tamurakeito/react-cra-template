@@ -50,7 +50,7 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
   const navigation = useNavigate();
   const redirect = () => {
     // パスが`/signup`以外であった場合ログイン画面へリダイレクト
-    if (window.location.pathname.indexOf("/sign-up/") !== 0) {
+    if (window.location.pathname.indexOf("/sign-up") !== 0) {
       navigation("/sign-in");
     }
   };

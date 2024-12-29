@@ -2,11 +2,12 @@ import Center from "ui/atoms/center";
 import classes from "./styles.module.scss";
 import Text, { textSizes } from "ui/atoms/text";
 import Button from "ui/atoms/button";
-import { GetHelloworld, getHelloworldErrors } from "data/api/getHelloworld";
 import {
-  checkIsErrorResponse,
   checkIsHelloworldResponse,
-} from "data/utils/typeGuards";
+  GetHelloworld,
+  getHelloworldErrors,
+} from "data/api/getHelloworld";
+import { checkIsErrorResponse } from "data/utils/typeGuards";
 import { setToast, toastTypes } from "components/toast";
 import { handleUnexpectedError } from "data/utils/handleErrors";
 import { tokenStorageKey } from "hooks/useLocalStrage";

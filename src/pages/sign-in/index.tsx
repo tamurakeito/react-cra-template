@@ -1,11 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import classes from "./styles.module.scss";
 import Text, { textColors, textSizes } from "ui/atoms/text";
-import { PostSignIn, postSignInErrors } from "data/api/postSignin";
 import {
-  checkIsErrorResponse,
   checkIsSignInResponse,
-} from "data/utils/typeGuards";
+  PostSignIn,
+  postSignInErrors,
+} from "data/api/postSignin";
+import { checkIsErrorResponse } from "data/utils/typeGuards";
 import { useAuthContext } from "providers/auth-provider";
 import Center from "ui/atoms/center";
 import Button from "ui/atoms/button";
@@ -59,6 +60,12 @@ export const SignIn = () => {
         case postSignInErrors.notFound:
           setToast("ユーザーが見つかりませんでした", toastTypes.error);
           return;
+        case postSignInErrors.internalServerError:
+          setToast(
+            "サーバで問題が発生しました. 時間を置いて再度お試しください.",
+            toastTypes.error
+          );
+          return;
         default:
           handleUnexpectedError();
       }
@@ -76,7 +83,7 @@ export const SignIn = () => {
   return (
     <Center className={classes.sign_in}>
       <div>
-        <Text size={textSizes.h2}>sign in</Text>
+        <Text size={textSizes.h2}>サインイン</Text>
       </div>
       <div className={classes.status}>
         {user ? (
@@ -91,8 +98,6 @@ export const SignIn = () => {
       </div>
       {!!!user ? (
         <>
-          {/* input atom層に実装 */}
-          {/* inputにsanitizeギミックなども入れたい */}
           <div>
             <Input
               ref={idRef}

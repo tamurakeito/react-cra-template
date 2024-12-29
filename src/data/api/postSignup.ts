@@ -1,14 +1,13 @@
 import { client } from "data/axios";
 import { ErrorResponse } from "data/utils/typeGuards";
-import internal from "stream";
 
-export type SignInResponse = {
+export type SignUpResponse = {
   id: number;
   user_id: string;
   name: string;
   token: string;
 };
-export const checkIsSignInResponse = (obj: any): obj is SignInResponse => {
+export const checkIsSignUpResponse = (obj: any): obj is SignUpResponse => {
   return (
     typeof obj.id === "number" &&
     typeof obj.user_id === "string" &&
@@ -17,13 +16,13 @@ export const checkIsSignInResponse = (obj: any): obj is SignInResponse => {
   );
 };
 
-export async function PostSignIn(
+export async function PostSignUp(
   userId: string,
   password: string
-): Promise<SignInResponse | ErrorResponse | undefined> {
+): Promise<SignUpResponse | ErrorResponse | undefined> {
   const data = { user_id: userId, password: password };
   try {
-    const url = "/sign-in";
+    const url = "/sign-up";
     const response = await client.post(url, data);
     return response.data;
   } catch (error: any) {
@@ -35,10 +34,10 @@ export async function PostSignIn(
   }
 }
 
-export const postSignInErrors = {
-  notFound: "user not found",
-  unauthorized: "invalid password",
+export const postSignUpErrors = {
+  badRequest: "invalid input format",
+  conflict: "user is already resisered",
   internalServerError: "internal server error",
 } as const;
-export type PostSignInErrors =
-  (typeof postSignInErrors)[keyof typeof postSignInErrors];
+export type PostSignUpErrors =
+  (typeof postSignUpErrors)[keyof typeof postSignUpErrors];

@@ -1,5 +1,24 @@
 import { client } from "data/axios";
-import { ErrorResponse, HelloworldResponse } from "data/utils/typeGuards";
+import { ErrorResponse } from "data/utils/typeGuards";
+
+export type HelloworldResponse = {
+  id: number;
+  hello: {
+    id: number;
+    name: string;
+    tag: boolean;
+  };
+};
+export const checkIsHelloworldResponse = (
+  obj: any
+): obj is HelloworldResponse => {
+  return (
+    typeof obj.id === "number" &&
+    typeof obj.hello.id === "number" &&
+    typeof obj.hello.name === "string" &&
+    typeof obj.hello.tag === "boolean"
+  );
+};
 
 export async function GetHelloworld(
   id: number
