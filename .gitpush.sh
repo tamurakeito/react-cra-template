@@ -1,11 +1,11 @@
 ## mainブランチに直接コミットする場合
 
-echo -e "\x1b[36mパスワードを入力してください\x1b[0m"
+echo "\x1b[36mパスワードを入力してください\x1b[0m"
 read -s -p '> ' passphrase
 echo
 
-eval "$(ssh-agent -s)"
-echo "$passphrase" | ssh-add ~/.ssh/id_rsa
+eval "$(ssh-agent -s)" > /dev/null
+echo "$passphrase" | ssh-add ~/.ssh/id_rsa > /dev/null
 
 git checkout main
 git pull
