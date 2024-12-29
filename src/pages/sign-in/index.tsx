@@ -14,6 +14,7 @@ import { handleUnexpectedError } from "data/utils/handleErrors";
 import { setToast, toastTypes } from "components/toast";
 import { useNavigate } from "react-router-dom";
 import Input from "ui/atoms/input";
+import Spinner from "ui/atoms/spinner";
 
 export const SignIn = () => {
   const idRef = useRef<HTMLInputElement | null>(null);
@@ -22,6 +23,7 @@ export const SignIn = () => {
   const [pass, setPass] = useState("");
   const { user, signIn, signOut } = useAuthContext();
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     idRef.current?.focus();
@@ -40,7 +42,10 @@ export const SignIn = () => {
   };
 
   const handleSignIn = async () => {
+    await setIsLoading(true);
+
     if (!validation(id, pass)) {
+      setIsLoading(false);
       return;
     }
 
@@ -56,22 +61,24 @@ export const SignIn = () => {
       switch (result.error) {
         case postSignInErrors.unauthorized:
           setToast("パスワードが間違っています", toastTypes.error);
-          return;
+          break;
         case postSignInErrors.notFound:
           setToast("ユーザーが見つかりませんでした", toastTypes.error);
-          return;
+          break;
         case postSignInErrors.internalServerError:
           setToast(
             "サーバで問題が発生しました. 時間を置いて再度お試しください.",
             toastTypes.error
           );
-          return;
+          break;
         default:
           handleUnexpectedError();
       }
     } else {
       handleUnexpectedError();
     }
+    setIsLoading(false);
+    return;
   };
   const handleSignOut = () => {
     signOut();
@@ -82,7 +89,7 @@ export const SignIn = () => {
 
   return (
     <Center className={classes.sign_in}>
-      <div>
+      <div className={classes.container}>
         <Text size={textSizes.h2}>サインイン</Text>
       </div>
       <div className={classes.status}>
@@ -98,7 +105,7 @@ export const SignIn = () => {
       </div>
       {!!!user ? (
         <>
-          <div>
+          <div className={classes.container}>
             <Input
               ref={idRef}
               value={id}
@@ -109,7 +116,7 @@ export const SignIn = () => {
               }}
             />
           </div>
-          <div>
+          <div className={classes.container}>
             <input
               ref={passRef}
               type={"password"}
@@ -121,8 +128,12 @@ export const SignIn = () => {
               }}
             />
           </div>
-          <Button className={classes.button} onClick={handleSignIn}>
-            サインイン
+          <Button
+            className={classes.button}
+            onClick={handleSignIn}
+            disabled={isLoading}
+          >
+            {!isLoading ? "サインイン" : <Spinner size={16} />}
           </Button>
         </>
       ) : (

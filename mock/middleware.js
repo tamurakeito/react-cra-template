@@ -4,6 +4,7 @@ module.exports = function (req, res, next) {
   if (req.method !== "GET") {
     req.method = "GET";
   }
-
-  next();
+  setTimeout(() => {
+    next();
+  }, 1000);
 };

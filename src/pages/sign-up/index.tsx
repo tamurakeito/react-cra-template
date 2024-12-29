@@ -14,6 +14,7 @@ import {
 import { useAuthContext } from "providers/auth-provider";
 import { checkIsErrorResponse } from "data/utils/typeGuards";
 import { handleUnexpectedError } from "data/utils/handleErrors";
+import Spinner from "ui/atoms/spinner";
 
 const SignUp = () => {
   const idRef = useRef<HTMLInputElement | null>(null);
@@ -22,6 +23,7 @@ const SignUp = () => {
   const [pass, setPass] = useState("");
   const { user, signIn, signOut } = useAuthContext();
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     idRef.current?.focus();
@@ -40,7 +42,10 @@ const SignUp = () => {
   };
 
   const handleSignUp = async () => {
+    await setIsLoading(true);
+
     if (!validation(id, pass)) {
+      setIsLoading(false);
       return;
     }
 
@@ -59,33 +64,35 @@ const SignUp = () => {
             "idまたはパスワードの形式が正しくありません",
             toastTypes.error
           );
-          return;
+          break;
         case postSignUpErrors.conflict:
           setToast(
             "既に登録されているIDのため使用できません",
             toastTypes.error
           );
-          return;
+          break;
         case postSignUpErrors.internalServerError:
           setToast(
             "サーバで問題が発生しました. 時間を置いて再度お試しください.",
             toastTypes.error
           );
-          return;
+          break;
         default:
           handleUnexpectedError();
       }
     } else {
       handleUnexpectedError();
     }
+    setIsLoading(false);
+    return;
   };
 
   return (
     <Center className={classes.sign_up}>
-      <div>
+      <div className={classes.container}>
         <Text size={textSizes.h2}>新規アカウント登録</Text>
       </div>
-      <div>
+      <div className={classes.container}>
         <Input
           ref={idRef}
           value={id}
@@ -96,7 +103,7 @@ const SignUp = () => {
           }}
         />
       </div>
-      <div>
+      <div className={classes.container}>
         <input
           ref={passRef}
           type={"password"}
@@ -108,8 +115,12 @@ const SignUp = () => {
           }}
         />
       </div>
-      <Button className={classes.button} onClick={handleSignUp}>
-        サインイン
+      <Button
+        className={classes.button}
+        onClick={handleSignUp}
+        disabled={isLoading}
+      >
+        {!isLoading ? "アカウント登録" : <Spinner size={16} />}
       </Button>
     </Center>
   );

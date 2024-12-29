@@ -1,0 +1,11 @@
+@use '../config/variables' as var;
+
+:export {
+  primary: var.$PRIMARY;
+  gray800: var.$GRAY_800;
+  gray700: var.$GRAY_700;
+  gray600: var.$GRAY_600;
+  gray300: var.$GRAY_300;
+  primarySoft: var.$PRIMARY_SOFT;
+  info: var.$INFO;
+}

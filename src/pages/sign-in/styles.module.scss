@@ -2,7 +2,7 @@
 
 .sign_in {
   margin: 100px;
-  div {
+  .container {
     margin: 10px 0;
   }
   input {
@@ -15,10 +15,12 @@
   }
   .button {
     margin: 0 auto;
+    min-width: 100px;
   }
 }
 
 .status {
   padding: 0 6px;
+  margin: 10px 0;
   background: var.$GRAY_200;
 }

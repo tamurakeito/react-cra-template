@@ -11,11 +11,13 @@ import { checkIsErrorResponse } from "data/utils/typeGuards";
 import { setToast, toastTypes } from "components/toast";
 import { handleUnexpectedError } from "data/utils/handleErrors";
 import { tokenStorageKey } from "hooks/useLocalStrage";
+import { useState } from "react";
+import Spinner from "ui/atoms/spinner";
 
 export const Home = () => {
   return (
     <Center className={classes.home}>
-      <div>
+      <div className={classes.container}>
         <Text size={textSizes.h1}>hello world</Text>
       </div>
       <HelloWorldButton id={1} />
@@ -26,8 +28,9 @@ export const Home = () => {
 };
 
 const HelloWorldButton = ({ id }: { id: number }) => {
+  const [isLoading, setIsLoading] = useState(false);
   const handleHelloworld = async (id: number) => {
-    console.log(localStorage.getItem(tokenStorageKey));
+    await setIsLoading(true);
     const result = await GetHelloworld(id);
     if (checkIsHelloworldResponse(result)) {
       setToast(`${result.id}: ${result.hello.name}`);
@@ -35,17 +38,23 @@ const HelloWorldButton = ({ id }: { id: number }) => {
       switch (result.error) {
         case getHelloworldErrors.notFound:
           setToast("データが見つかりません", toastTypes.error);
-          return;
+          break;
         default:
           handleUnexpectedError();
       }
     } else {
       handleUnexpectedError();
     }
+    setIsLoading(false);
+    return;
   };
   return (
-    <Button className={classes.button} onClick={() => handleHelloworld(id)}>
-      id: {id}
+    <Button
+      className={classes.button}
+      disabled={isLoading}
+      onClick={() => handleHelloworld(id)}
+    >
+      {!isLoading ? `id: ${id}` : <Spinner size={16} />}
     </Button>
   );
 };
