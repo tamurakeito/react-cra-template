@@ -1,12 +1,8 @@
 import { useAuthContext } from "providers/auth-provider";
 import React from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 
-type PrivateRouteProps = {
-  children: React.ReactElement;
-};
-
-const PrivateRoute = ({ children }: PrivateRouteProps) => {
+const AuthRoute = () => {
   const { user } = useAuthContext();
 
   // ログインしていない場合、`/sign-in` にリダイレクト
@@ -15,7 +11,7 @@ const PrivateRoute = ({ children }: PrivateRouteProps) => {
   }
 
   // ログイン済みならそのままレンダリング
-  return children;
+  return <Outlet />;
 };
 
-export default PrivateRoute;
+export default AuthRoute;
