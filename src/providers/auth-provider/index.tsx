@@ -40,26 +40,13 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
     setUser(account);
     setToken(token);
   };
-  const clear = () => {
+  const signOut = () => {
     setUser(undefined);
     setToken(undefined);
-  };
-  const signOut = () => {
-    clear();
-    redirect();
   };
 
   // redirect to signin
   const navigation = useNavigate();
-  const redirect = () => {
-    // パスが`/signup`以外であった場合ログイン画面へリダイレクト
-    if (
-      window.location.pathname.indexOf("/sign-in") !== 0 &&
-      window.location.pathname.indexOf("/sign-up") !== 0
-    ) {
-      navigation("/sign-in");
-    }
-  };
   useEffect(
     () => {
       // ログインしていない場合
@@ -80,7 +67,7 @@ export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
         window.location.pathname.indexOf("/sign-in") === 0 ||
         window.location.pathname.indexOf("/sign-up") === 0
       ) {
-        clear();
+        signOut();
       }
 
       // トークンが無効である場合
