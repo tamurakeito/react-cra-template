@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction, useState } from "react";
 
-export const userStorageKey = "__react-ts-template_user__V1";
-export const tokenStorageKey = "__react-ts-template_token__V1";
+export const userStorageKey = "__react-cra-template_user__V1";
+export const tokenStorageKey = "__react-cra-template_token__V1";
 
 // copied from: https://usehooks.com/useLocalStorage/
 // Hook

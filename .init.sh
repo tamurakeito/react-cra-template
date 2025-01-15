@@ -9,9 +9,9 @@ yes | rm -r ./.git
 echo '...gitをリセットしました...'
 
 # packageにある名前を一括で変更する記述
-find . -type f -exec sed -i '' "s/react-ts-template/${title}/g" {} +
+find . -type f -exec sed -i '' "s/react-cra-template/${title}/g" {} +
 cd ../
-mv react-ts-template ${title}
+mv react-cra-template ${title}
 echo '...プロジェクト名を設定しました...'
 
 cd ${title}/src
